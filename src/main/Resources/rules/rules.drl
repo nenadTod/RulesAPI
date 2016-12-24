@@ -1,0 +1,44 @@
+package rules;
+
+rule "Calculate"
+
+    when
+        m : InsuredPerson( totalPrice == 0)
+    then
+        m.setTotalPrice((m.getInsuredAmountPrice() + m.getDuration()*m.getPrice()*m.getRegionCoefficient()*m.getAgeCoefficient()*m.getSportCoefficient()));
+        update( m );
+
+end
+
+
+no-loop
+rule "Group Discount"
+
+    when
+        m : InsuredGroup( numberOfPeople >= 3)
+    then
+        m.calculateWithDiscount(0.8);
+        update( m );
+
+end
+
+no-loop
+rule "No Discount"
+
+    when
+        m : InsuredGroup( numberOfPeople < 3)
+    then
+        m.calculate();
+        update( m );
+
+end
+
+/*
+rule "Pricing bracket_10"
+when
+    Driver( age >= 18, age <= 24, locationRiskProfile == "LOW", priorClaims == "1")
+    policy: Policy()
+then
+    policy.setBasePrice(450);
+end
+*/
