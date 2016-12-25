@@ -3,15 +3,22 @@ package rules;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import rules.beans.Rizik;
+import rules.repositories.Rizik_Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
 public class RulesAPI {
+
+    @Autowired
+    Rizik_Repository rr;
 
     @RequestMapping("/rules")
     public String rules(@RequestParam(value="number", defaultValue="2") String number) {
@@ -58,6 +65,9 @@ public class RulesAPI {
 
         System.out.println("-----------------------------");
 
+
+        List<Rizik> lr = rr.findAll();
+        System.out.print(lr);
 
         return number;
     }
