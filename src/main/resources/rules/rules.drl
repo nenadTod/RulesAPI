@@ -1,38 +1,101 @@
 package rules;
+import rules.beans.CalculationModel;
 
+lock-on-active
 rule "Calculate"
 
     when
-        m : InsuredPerson( totalPrice == 0)
+        m : CalculationModel( totalPrice: totalPrice, numberOfPeople: numberOfPeople, dailyPrice: dailyPrice, days: getDuration())
     then
-        m.setTotalPrice((m.getInsuredAmountPrice() + m.getDuration()*m.getPrice()*m.getRegionCoefficient()*m.getAgeCoefficient()*m.getSportCoefficient()));
+        m.setTotalPrice(numberOfPeople * days * dailyPrice);
+        System.out.println("Calculate " + m.getTotalPrice());
         update( m );
 
 end
 
+lock-on-active
+rule "Region price"
 
-no-loop
+    when
+        m : CalculationModel ( totalPrice: totalPrice, regionCoefficient: regionCoefficient > 0)
+    then
+        m.setTotalPrice(totalPrice * regionCoefficient);
+        System.out.println("Region " + m.getTotalPrice());
+        update( m );
+
+end
+
+lock-on-active
+rule "Sport risk"
+
+    when
+        m : CalculationModel ( totalPrice: totalPrice, sportCoefficient: sportCoefficient > 0 )
+    then
+        m.setTotalPrice(totalPrice * sportCoefficient);
+        System.out.println("Sport " + m.getTotalPrice());
+        update( m );
+
+end
+
+lock-on-active
+rule "Insured amount addition"
+
+    when
+        m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, insuredAmountPrice: insuredAmountPrice > 0)
+    then
+        m.setTotalPrice(totalPrice + numberOfPeople * insuredAmountPrice);
+        System.out.println("Amount " + m.getTotalPrice());
+        update( m );
+
+end
+
+lock-on-active
+rule "Young discounts"
+
+    when
+        m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, numberOfYoungs: youngs > 0, youngCoefficient: youngCoefficient)
+    then
+        m.setTotalPrice(totalPrice * ((numberOfYoungs/numberOfPeople) * youngCoefficient + (1-(numberOfYoungs/numberOfPeople))));
+        System.out.println("Young " + m.getTotalPrice());
+        update( m );
+
+end
+
+lock-on-active
+rule "Old age risk"
+
+    when
+            m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, numberOfOlds: olds > 0, oldCoefficient: oldCoefficient)
+        then
+            m.setTotalPrice(totalPrice * ((numberOfOlds/numberOfPeople) * oldCoefficient + (1-(numberOfOlds/numberOfPeople))));
+            System.out.println("Old " + m.getTotalPrice());
+            update( m );
+
+end
+
+lock-on-active
 rule "Group Discount"
 
     when
-        m : InsuredGroup( numberOfPeople >= 3)
+        m : CalculationModel ( numberOfPeople >= 3, totalPrice: totalPrice)
     then
-        m.calculateWithDiscount(0.8);
+        m.setTotalPrice(totalPrice * 0.8);
+        System.out.println("Group " + m.getTotalPrice());
         update( m );
 
 end
-
+/*
 no-loop
 rule "No Discount"
 
     when
-        m : InsuredGroup( numberOfPeople < 3)
+        m : Policy( numberOfPeople < 3)
     then
         m.calculate();
         update( m );
 
 end
-
+*/
 /*
 rule "Pricing bracket_10"
 when

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * Created by Vuletic on 14.12.2016.
  */
-public class InsuredGroup {
+public class Policy {
 
     private ArrayList<InsuredPerson> insuredPeople = new ArrayList<>();
     private double totalPrice;
 
-    public InsuredGroup() {
+    public Policy() {
         totalPrice = 0;
     }
 

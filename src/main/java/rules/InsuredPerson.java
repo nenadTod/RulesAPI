@@ -5,6 +5,7 @@ package rules;
  */
 public class InsuredPerson {
 
+    private String name;
     private double insuredAmountPrice;
     private int duration;
     private double price;
@@ -14,12 +15,7 @@ public class InsuredPerson {
     private double totalPrice;
 
     public InsuredPerson(){
-        insuredAmountPrice = 1000;
-        duration = 7;
-        price = 150;
-        regionCoefficient = 1.2;
-        sportCoefficient = 1.1;
-        ageCoefficient = 0.9;
+
         totalPrice = 0;
     }
 
