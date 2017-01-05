@@ -55,7 +55,7 @@ rule "Young discounts"
     when
         m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, numberOfYoungs: youngs > 0, youngCoefficient: youngCoefficient)
     then
-        m.setTotalPrice(totalPrice * ((numberOfYoungs/numberOfPeople) * youngCoefficient + (1-(numberOfYoungs/numberOfPeople))));
+        m.setTotalPrice(totalPrice * (((double)numberOfYoungs/(double)numberOfPeople) * youngCoefficient + (1-((double)numberOfYoungs/(double)numberOfPeople))));
         System.out.println("Young " + m.getTotalPrice());
         update( m );
 
@@ -67,7 +67,7 @@ rule "Old age risk"
     when
             m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, numberOfOlds: olds > 0, oldCoefficient: oldCoefficient)
         then
-            m.setTotalPrice(totalPrice * ((numberOfOlds/numberOfPeople) * oldCoefficient + (1-(numberOfOlds/numberOfPeople))));
+            m.setTotalPrice(totalPrice * (((double)numberOfOlds/(double)numberOfPeople) * oldCoefficient + (1-((double)numberOfOlds/(double)numberOfPeople))));
             System.out.println("Old " + m.getTotalPrice());
             update( m );
 
