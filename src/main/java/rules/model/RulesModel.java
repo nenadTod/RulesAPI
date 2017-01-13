@@ -11,7 +11,9 @@ public class RulesModel {
     private InsuredCar insuredCar;
     private InsuredRealEstate insuredRealEstate;
     private int days;
-    private double discount;
+    private double groupDiscount;
+    private double packageDiscount;
+    private double totalDiscount;
     private double totalPrice;
 
     public RulesModel() {
@@ -66,11 +68,24 @@ public class RulesModel {
         return insuredPeople.size();
     }
 
-    public double getDiscount() {
-        return discount;
+    public double getGroupDiscount() {
+        return groupDiscount;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
+    public void setGroupDiscount(double discount) {
+        this.groupDiscount = discount;
     }
+
+    public double getPackageDiscount() {
+        return packageDiscount;
+    }
+
+    public void setPackageDiscount(double packageDiscount) {
+        this.packageDiscount = packageDiscount;
+    }
+
+    public double getTotalDiscount() {
+        return packageDiscount + groupDiscount;
+    }
+
 }

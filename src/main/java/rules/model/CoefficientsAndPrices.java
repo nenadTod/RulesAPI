@@ -12,7 +12,12 @@ public class CoefficientsAndPrices {
     private double youngsCoefficient;
     private double adultsCoefficient;
     private double oldsCoefficient;
-    /* TODO: dodati za auto i nekretnine */
+
+    private double carPricePerDay;
+    /* TODO: ostalo */
+
+    private double realEstatePricePerDay;
+    /* TODO: ostalo */
 
     public CoefficientsAndPrices() {
 
@@ -83,5 +88,21 @@ public class CoefficientsAndPrices {
 
     public void setOldsCoefficient(double oldsCoefficient) {
         this.oldsCoefficient = oldsCoefficient;
+    }
+
+    public double getCarPricePerDay() {
+        return carPricePerDay;
+    }
+
+    public void setCarPricePerDay(double carPricePerDay) {
+        this.carPricePerDay = carPricePerDay;
+    }
+
+    public double getRealEstatePricePerDay() {
+        return realEstatePricePerDay;
+    }
+
+    public void setRealEstatePricePerDay(double realEstatePricePerDay) {
+        this.realEstatePricePerDay = realEstatePricePerDay;
     }
 }

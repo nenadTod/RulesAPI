@@ -101,9 +101,9 @@ end
 rule "Group discount"
 
     when
-        m: RulesModel (numberOfPeople: numberOfPeople > 3, totalPrice: totalPrice)
+        m: RulesModel (numberOfPeople: numberOfPeople > 4, totalPrice: totalPrice)
     then
-        m.setDiscount(0.2 * totalPrice);
+        m.setGroupDiscount(0.2 * totalPrice);
 
 end
 
