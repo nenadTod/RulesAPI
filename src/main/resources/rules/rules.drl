@@ -1,27 +1,34 @@
 package rules;
-import rules.beans.CalculationModel;
+import rules.model.CoefficientsAndPrices;
+import rules.model.RulesModel
+import rules.model.InsuredPerson;
+import rules.model.InsuredCar;
+import rules.model.InsuredRealEstate;
 
 lock-on-active
-rule "Calculate"
+rule "Base price"
 
     when
-        m : CalculationModel( totalPrice: totalPrice, numberOfPeople: numberOfPeople, dailyPrice: dailyPrice, days: getDuration())
+        m: RulesModel( days: days )
+        person: InsuredPerson () from m.insuredPeople
+        prices: CoefficientsAndPrices ( dailyPrice: pricePerDay)
     then
-        m.setTotalPrice(numberOfPeople * days * dailyPrice);
-        System.out.println("Calculate " + m.getTotalPrice());
-        update( m );
+        person.setBasePrice(days * dailyPrice);
+        person.setPrice(days * dailyPrice);
+        update (m);
 
 end
 
 lock-on-active
-rule "Region price"
+rule "Region adjustment"
 
     when
-        m : CalculationModel ( totalPrice: totalPrice, regionCoefficient: regionCoefficient > 0)
+        m: RulesModel(  )
+        person: InsuredPerson ( basePrice: basePrice, price: price) from m.insuredPeople
+        prices: CoefficientsAndPrices ( regionCoefficient: regionCoefficient)
     then
-        m.setTotalPrice(totalPrice * regionCoefficient);
-        System.out.println("Region " + m.getTotalPrice());
-        update( m );
+        person.setPrice(regionCoefficient * basePrice + (price-basePrice));
+        update (m);
 
 end
 
@@ -29,79 +36,80 @@ lock-on-active
 rule "Sport risk"
 
     when
-        m : CalculationModel ( totalPrice: totalPrice, sportCoefficient: sportCoefficient > 0 )
+        m: RulesModel ()
+        person: InsuredPerson ( basePrice: basePrice, price: price) from m.insuredPeople
+        prices: CoefficientsAndPrices ( sportCoefficient: sportCoefficient)
     then
-        m.setTotalPrice(totalPrice * sportCoefficient);
-        System.out.println("Sport " + m.getTotalPrice());
-        update( m );
+        person.setPrice(sportCoefficient * basePrice + (price-basePrice));
+        update (m);
 
 end
 
 lock-on-active
-rule "Insured amount addition"
+rule "Insured amount adjustment"
 
     when
-        m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, insuredAmountPrice: insuredAmountPrice > 0)
+        m: RulesModel()
+        person: InsuredPerson ( price: price) from m.insuredPeople
+        prices: CoefficientsAndPrices ( insuredAmountAddition: insuredAmountPrice)
     then
-        m.setTotalPrice(totalPrice + numberOfPeople * insuredAmountPrice);
-        System.out.println("Amount " + m.getTotalPrice());
-        update( m );
+       person.setPrice(price + insuredAmountAddition);
+       update (m);
 
 end
 
 lock-on-active
-rule "Young discounts"
+rule "Elderly risk"
 
     when
-        m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, numberOfYoungs: youngs > 0, youngCoefficient: youngCoefficient)
+        m: RulesModel()
+        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 2) from m.insuredPeople
+        prices: CoefficientsAndPrices ( elderlyCoefficient: oldsCoefficient)
     then
-        m.setTotalPrice(totalPrice * (((double)numberOfYoungs/(double)numberOfPeople) * youngCoefficient + (1-((double)numberOfYoungs/(double)numberOfPeople))));
-        System.out.println("Young " + m.getTotalPrice());
-        update( m );
+        person.setPrice(elderlyCoefficient * basePrice + (price-basePrice));
+        update (m);
 
 end
 
 lock-on-active
-rule "Old age risk"
+rule "Young discount"
 
     when
-            m : CalculationModel ( totalPrice: totalPrice, numberOfPeople: numberOfPeople, numberOfOlds: olds > 0, oldCoefficient: oldCoefficient)
-        then
-            m.setTotalPrice(totalPrice * (((double)numberOfOlds/(double)numberOfPeople) * oldCoefficient + (1-((double)numberOfOlds/(double)numberOfPeople))));
-            System.out.println("Old " + m.getTotalPrice());
-            update( m );
+        m: RulesModel()
+        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 0) from m.insuredPeople
+        prices: CoefficientsAndPrices ( youngsCoefficient: youngsCoefficient)
+    then
+       person.setPrice(youngsCoefficient * basePrice + (price-basePrice));
+       update (m);
 
 end
 
 lock-on-active
-rule "Group Discount"
+rule "Adults price"
 
     when
-        m : CalculationModel ( numberOfPeople >= 3, totalPrice: totalPrice)
+        m: RulesModel()
+        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 1) from m.insuredPeople
+        prices: CoefficientsAndPrices ( adultsCoefficient: adultsCoefficient)
     then
-        m.setTotalPrice(totalPrice * 0.8);
-        System.out.println("Group " + m.getTotalPrice());
-        update( m );
+       person.setPrice(adultsCoefficient * basePrice + (price-basePrice));
+       update (m);
 
 end
+
+
+rule "Group discount"
+
+    when
+        m: RulesModel (numberOfPeople: numberOfPeople > 3, totalPrice: totalPrice)
+    then
+        m.setDiscount(0.2 * totalPrice);
+
+end
+
 /*
-no-loop
-rule "No Discount"
-
-    when
-        m : Policy( numberOfPeople < 3)
-    then
-        m.calculate();
-        update( m );
-
-end
+TODO: discount ako uzme za auto ili stan
+TODO: pravila auto i stan
 */
-/*
-rule "Pricing bracket_10"
-when
-    Driver( age >= 18, age <= 24, locationRiskProfile == "LOW", priorClaims == "1")
-    policy: Policy()
-then
-    policy.setBasePrice(450);
-end
-*/
+
+

@@ -1,4 +1,4 @@
-package rules;
+package rules.controllers;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -6,21 +6,22 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rules.beans.CK_Rizik;
-import rules.beans.CalculationModel;
 import rules.beans.CalculatorData;
+import rules.model.CoefficientsAndPrices;
+import rules.model.InsuredPerson;
+import rules.model.RulesModel;
 import rules.repositories.CK_Rizik_Repository;
 
 import java.util.concurrent.TimeUnit;
 
-
 @RestController
-public class RulesAPI {
+public class CalculatorController {
 
     @Autowired
     CK_Rizik_Repository rr;
 
     @CrossOrigin
-    @RequestMapping(value = "/rules", method = RequestMethod.POST)
+    @RequestMapping(value = "/calculator", method = RequestMethod.POST)
     public Double rules(@RequestBody CalculatorData data) {
 
         KieServices ks = KieServices.Factory.get();
@@ -42,29 +43,34 @@ public class RulesAPI {
         long diff = data.getDateTo().getTime() - data.getDateFrom().getTime();
         int daysDiff = (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-        /*Policy policy = new Policy();
 
-        for(int i = 0; i < data.getAgeNumberYoung(); i++){
-            policy.addPerson(new InsuredPerson());
-        }*/
+        CoefficientsAndPrices cp = new CoefficientsAndPrices();
+        cp.setYoungsCoefficient(youngs.getKoeficijent_CK_Rizik());
+        cp.setAdultsCoefficient(adults.getKoeficijent_CK_Rizik());
+        cp.setOldsCoefficient(olds.getKoeficijent_CK_Rizik());
+        cp.setSportCoefficient(sport.getKoeficijent_CK_Rizik());
+        cp.setRegionCoefficient(location.getKoeficijent_CK_Rizik());
+        cp.setPricePerDay(dayPrice.getCena_CK_Rizik());
+        cp.setInsuredAmountPrice(amount.getCena_CK_Rizik());
 
-        CalculationModel model = new CalculationModel();
-        model.setYoungCoefficient(youngs.getKoeficijent_CK_Rizik());
-        model.setAdultCoefficient(adults.getKoeficijent_CK_Rizik());
-        model.setOldCoefficient(olds.getKoeficijent_CK_Rizik());
-        model.setSportCoefficient(sport.getKoeficijent_CK_Rizik());
-        model.setAdults(data.getAgeNumberAdult());
-        model.setYoungs(data.getAgeNumberYoung());
-        model.setOlds(data.getAgeNumberOld());
-        model.setDailyPrice(dayPrice.getCena_CK_Rizik());
-        model.setDuration(daysDiff);
-        model.setRegionCoefficient(location.getKoeficijent_CK_Rizik());
-        model.setInsuredAmountPrice(amount.getCena_CK_Rizik());
+        RulesModel model = new RulesModel();
+
+        model.setDays(daysDiff);
+
+        for (int i = 0; i < data.getAgeNumberYoung(); i++){
+            model.addPerson(new InsuredPerson(0));
+        }
+        for (int i = 0; i < data.getAgeNumberAdult(); i++){
+            model.addPerson(new InsuredPerson(1));
+        }
+        for (int i = 0; i < data.getAgeNumberOld(); i++){
+            model.addPerson(new InsuredPerson(2));
+        }
 
         kSession.insert(model);
-
+        kSession.insert(cp);
         kSession.fireAllRules();
-        System.out.println(model.getTotalPrice());
-        return model.getTotalPrice();
+
+        return model.getTotalPrice() - model.getDiscount();
     }
 }
