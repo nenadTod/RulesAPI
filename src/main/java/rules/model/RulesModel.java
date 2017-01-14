@@ -15,6 +15,7 @@ public class RulesModel {
     private double packageDiscount;
     private double totalDiscount;
     private double totalPrice;
+    /* TODO: pdv */
 
     public RulesModel() {
         totalPrice = 0;

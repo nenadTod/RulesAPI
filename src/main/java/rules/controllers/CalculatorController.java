@@ -71,6 +71,6 @@ public class CalculatorController {
         kSession.insert(cp);
         kSession.fireAllRules();
 
-        return model.getTotalPrice() - model.getDiscount();
+        return model.getTotalPrice() - model.getTotalDiscount();
     }
 }
