@@ -13,11 +13,17 @@ public class CoefficientsAndPrices {
     private double adultsCoefficient;
     private double oldsCoefficient;
 
-    private double carPricePerDay;
-    /* TODO: ostalo */
+    private double realEstateAgeCoefficient;
+    private double realEstateValuePrice;
+    private double floodPricePerDay;
+    private double firePricePerDay;
+    private double burglaryPricePerDay;
 
-    private double realEstatePricePerDay;
-    /* TODO: ostalo */
+    private double towPrice;
+    private double repairPrice;
+    private double hotelPrice;
+    private double alternativePrice;
+
 
     public CoefficientsAndPrices() {
 
@@ -90,19 +96,75 @@ public class CoefficientsAndPrices {
         this.oldsCoefficient = oldsCoefficient;
     }
 
-    public double getCarPricePerDay() {
-        return carPricePerDay;
+    public double getRealEstateAgeCoefficient() {
+        return realEstateAgeCoefficient;
     }
 
-    public void setCarPricePerDay(double carPricePerDay) {
-        this.carPricePerDay = carPricePerDay;
+    public void setRealEstateAgeCoefficient(double realEstateAgeCoefficient) {
+        this.realEstateAgeCoefficient = realEstateAgeCoefficient;
     }
 
-    public double getRealEstatePricePerDay() {
-        return realEstatePricePerDay;
+    public double getRealEstateValuePrice() {
+        return realEstateValuePrice;
     }
 
-    public void setRealEstatePricePerDay(double realEstatePricePerDay) {
-        this.realEstatePricePerDay = realEstatePricePerDay;
+    public void setRealEstateValuePrice(double realEstateValuePrice) {
+        this.realEstateValuePrice = realEstateValuePrice;
+    }
+
+    public double getFloodPricePerDay() {
+        return floodPricePerDay;
+    }
+
+    public void setFloodPricePerDay(double floodPricePerDay) {
+        this.floodPricePerDay = floodPricePerDay;
+    }
+
+    public double getFirePricePerDay() {
+        return firePricePerDay;
+    }
+
+    public void setFirePricePerDay(double firePricePerDay) {
+        this.firePricePerDay = firePricePerDay;
+    }
+
+    public double getBurglaryPricePerDay() {
+        return burglaryPricePerDay;
+    }
+
+    public void setBurglaryPricePerDay(double burglaryPricePerDay) {
+        this.burglaryPricePerDay = burglaryPricePerDay;
+    }
+
+    public double getTowPrice() {
+        return towPrice;
+    }
+
+    public void setTowPrice(double towPrice) {
+        this.towPrice = towPrice;
+    }
+
+    public double getRepairPrice() {
+        return repairPrice;
+    }
+
+    public void setRepairPrice(double repairPrice) {
+        this.repairPrice = repairPrice;
+    }
+
+    public double getHotelPrice() {
+        return hotelPrice;
+    }
+
+    public void setHotelPrice(double hotelPrice) {
+        this.hotelPrice = hotelPrice;
+    }
+
+    public double getAlternativePrice() {
+        return alternativePrice;
+    }
+
+    public void setAlternativePrice(double alternativePrice) {
+        this.alternativePrice = alternativePrice;
     }
 }

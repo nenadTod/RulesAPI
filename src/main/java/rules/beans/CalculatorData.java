@@ -16,6 +16,7 @@ public class CalculatorData {
     private Integer ageNumberAdult;
     private Integer ageNumberOld;
     private Integer selectedSport;
+    private Boolean sport;
 
     private Boolean residenceFromFlood;
     private Boolean residenceFromFire;
@@ -24,15 +25,78 @@ public class CalculatorData {
     private Integer selectedRealEstateAge;
     private Integer selectedRealEstateValue;
 
+    private Boolean alternateTransport;
+    private Boolean hotel;
+    private Boolean towing;
+    private Boolean repair;
     private Integer selectedAlternateTransportationDistance;
     private Integer selectedHotelDays;
     private Integer selectedTowingDistance;
     private Integer selectedReparationPrice;
 
+    private Boolean realEstateInsured;
+    private Boolean carInsured;
+
     public CalculatorData() {
         residenceFromFire = false;
         residenceFromFlood = false;
         residenceFromTheft = false;
+    }
+
+    public Boolean getSport() {
+        return sport;
+    }
+
+    public void setSport(Boolean sport) {
+        this.sport = sport;
+    }
+
+    public Boolean getAlternateTransport() {
+        return alternateTransport;
+    }
+
+    public void setAlternateTransport(Boolean alternateTransport) {
+        this.alternateTransport = alternateTransport;
+    }
+
+    public Boolean getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Boolean hotel) {
+        this.hotel = hotel;
+    }
+
+    public Boolean getTowing() {
+        return towing;
+    }
+
+    public void setTowing(Boolean towing) {
+        this.towing = towing;
+    }
+
+    public Boolean getRepair() {
+        return repair;
+    }
+
+    public void setRepair(Boolean repair) {
+        this.repair = repair;
+    }
+
+    public Boolean getRealEstateInsured() {
+        return realEstateInsured;
+    }
+
+    public void setRealEstateInsured(Boolean realEstateInsured) {
+        this.realEstateInsured = realEstateInsured;
+    }
+
+    public Boolean getCarInsured() {
+        return carInsured;
+    }
+
+    public void setCarInsured(Boolean carInsured) {
+        this.carInsured = carInsured;
     }
 
     public Integer getSelectedLocation() {

@@ -34,7 +34,7 @@ end
 
 lock-on-active
 rule "Sport risk"
-
+    /* TODO: mozda proveriti za null */
     when
         m: RulesModel ()
         person: InsuredPerson ( basePrice: basePrice, price: price) from m.insuredPeople
@@ -110,6 +110,7 @@ end
 /*
 TODO: discount ako uzme za auto ili stan
 TODO: pravila auto i stan
+TODO: PDV
 */
 
 

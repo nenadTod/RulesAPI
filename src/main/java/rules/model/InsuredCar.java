@@ -1,5 +1,7 @@
 package rules.model;
 
+import rules.beans.CalculatorData;
+
 /**
  * Created by Vuletic on 13.1.2017.
  */
@@ -11,6 +13,20 @@ public class InsuredCar {
     private boolean alternativeRide;
 
     public InsuredCar() {
+    }
+
+    public InsuredCar(boolean towing, boolean repairment, boolean hotel, boolean alternativeRide) {
+        this.towing = towing;
+        this.repairment = repairment;
+        this.hotel = hotel;
+        this.alternativeRide = alternativeRide;
+    }
+
+    public InsuredCar(CalculatorData data){
+        towing = data.getSelectedTowingDistance() != null ? true:false;
+        repairment = data.getSelectedReparationPrice() != null ? true:false;
+        hotel = data.getSelectedHotelDays() != null ? true:false;
+        alternativeRide = data.getSelectedAlternateTransportationDistance() != null ? true:false;
     }
 
     public boolean isTowing() {

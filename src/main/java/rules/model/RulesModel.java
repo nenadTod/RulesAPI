@@ -13,7 +13,6 @@ public class RulesModel {
     private int days;
     private double groupDiscount;
     private double packageDiscount;
-    private double totalDiscount;
     private double totalPrice;
     /* TODO: pdv */
 

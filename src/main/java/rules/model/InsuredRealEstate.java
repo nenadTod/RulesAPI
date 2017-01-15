@@ -6,13 +6,20 @@ package rules.model;
 public class InsuredRealEstate {
 
     private double area;
-    private double estimatedPrice;
-    private double age;
+   // private double estimatedPrice;
+   // private double age;
     private boolean flood;
     private boolean fire;
     private boolean burglary;
 
     public InsuredRealEstate() {
+    }
+
+    public InsuredRealEstate(double area, boolean flood, boolean fire, boolean burglary) {
+        this.area = area;
+        this.flood = flood;
+        this.fire = fire;
+        this.burglary = burglary;
     }
 
     public double getArea() {
@@ -23,7 +30,7 @@ public class InsuredRealEstate {
         this.area = area;
     }
 
-    public double getEstimatedPrice() {
+   /* public double getEstimatedPrice() {
         return estimatedPrice;
     }
 
@@ -37,7 +44,7 @@ public class InsuredRealEstate {
 
     public void setAge(double age) {
         this.age = age;
-    }
+    }*/
 
     public boolean isFlood() {
         return flood;
