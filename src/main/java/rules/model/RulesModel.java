@@ -14,6 +14,7 @@ public class RulesModel {
     private double groupDiscount;
     private double packageDiscount;
     private double totalPrice;
+    private boolean sport;
     /* TODO: pdv */
 
     public RulesModel() {
@@ -57,6 +58,12 @@ public class RulesModel {
         for (InsuredPerson p: insuredPeople){
             totalPrice += p.getPrice();
         }
+        if (insuredCar != null)
+            totalPrice += insuredCar.getPrice();
+
+        if(insuredRealEstate != null)
+            totalPrice += insuredRealEstate.getPrice();
+
         return totalPrice;
     }
 
@@ -88,4 +95,11 @@ public class RulesModel {
         return packageDiscount + groupDiscount;
     }
 
+    public boolean isSport() {
+        return sport;
+    }
+
+    public void setSport(boolean sport) {
+        this.sport = sport;
+    }
 }

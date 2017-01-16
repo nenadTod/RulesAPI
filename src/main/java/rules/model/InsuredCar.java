@@ -11,8 +11,10 @@ public class InsuredCar {
     private boolean repairment;
     private boolean hotel;
     private boolean alternativeRide;
+    private double price;
 
     public InsuredCar() {
+        price = 0;
     }
 
     public InsuredCar(boolean towing, boolean repairment, boolean hotel, boolean alternativeRide) {
@@ -20,13 +22,23 @@ public class InsuredCar {
         this.repairment = repairment;
         this.hotel = hotel;
         this.alternativeRide = alternativeRide;
+        price = 0;
     }
 
     public InsuredCar(CalculatorData data){
-        towing = data.getSelectedTowingDistance() != null ? true:false;
-        repairment = data.getSelectedReparationPrice() != null ? true:false;
-        hotel = data.getSelectedHotelDays() != null ? true:false;
-        alternativeRide = data.getSelectedAlternateTransportationDistance() != null ? true:false;
+        towing = data.getTowing();
+        repairment = data.getRepair();
+        hotel = data.getHotel();
+        alternativeRide = data.getAlternateTransport();
+        price = 0;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public boolean isTowing() {

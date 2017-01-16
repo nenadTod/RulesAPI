@@ -11,8 +11,10 @@ public class InsuredRealEstate {
     private boolean flood;
     private boolean fire;
     private boolean burglary;
+    private double price;
 
     public InsuredRealEstate() {
+        price = 0;
     }
 
     public InsuredRealEstate(double area, boolean flood, boolean fire, boolean burglary) {
@@ -20,6 +22,7 @@ public class InsuredRealEstate {
         this.flood = flood;
         this.fire = fire;
         this.burglary = burglary;
+        price = 0;
     }
 
     public double getArea() {
@@ -68,5 +71,13 @@ public class InsuredRealEstate {
 
     public void setBurglary(boolean burglary) {
         this.burglary = burglary;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

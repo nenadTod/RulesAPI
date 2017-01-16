@@ -34,9 +34,9 @@ end
 
 lock-on-active
 rule "Sport risk"
-    /* TODO: mozda proveriti za null */
+
     when
-        m: RulesModel ()
+        m: RulesModel ( sport == true )
         person: InsuredPerson ( basePrice: basePrice, price: price) from m.insuredPeople
         prices: CoefficientsAndPrices ( sportCoefficient: sportCoefficient)
     then
@@ -107,9 +107,93 @@ rule "Group discount"
 
 end
 
+rule "Real Estate insured from burglary"
+
+    when
+        m: RulesModel ( insuredRealEstate != null, days: days)
+        insuredRealEstate: InsuredRealEstate(area: area, currentPrice: price, burglary == true) from m.insuredRealEstate
+        prices: CoefficientsAndPrices( pricePerDay: burglaryPricePerDay, ageCoeff : realEstateAgeCoefficient, luxuryAddition: realEstateValuePrice)
+    then
+        insuredRealEstate.setPrice(currentPrice + days * area * pricePerDay * ageCoeff + luxuryAddition);
+
+
+end
+
+rule "Real Estate insured from flood"
+
+    when
+        m: RulesModel ( insuredRealEstate != null, days: days)
+        insuredRealEstate: InsuredRealEstate(area: area, currentPrice: price, flood == true) from m.insuredRealEstate
+        prices: CoefficientsAndPrices( pricePerDay: floodPricePerDay, ageCoeff : realEstateAgeCoefficient, luxuryAddition: realEstateValuePrice)
+    then
+        insuredRealEstate.setPrice(currentPrice + days * area * pricePerDay * ageCoeff + luxuryAddition);
+
+
+end
+
+rule "Real Estate insured from fire"
+
+    when
+        m: RulesModel ( insuredRealEstate != null, days: days)
+        insuredRealEstate: InsuredRealEstate(area: area, currentPrice: price, fire == true) from m.insuredRealEstate
+        prices: CoefficientsAndPrices( pricePerDay: firePricePerDay, ageCoeff : realEstateAgeCoefficient, luxuryAddition: realEstateValuePrice)
+    then
+        insuredRealEstate.setPrice(currentPrice + days * area * pricePerDay * ageCoeff + luxuryAddition);
+
+
+end
+
+rule "Towing"
+
+    when
+        m: RulesModel ( insuredCar != null, days: days)
+        insuredCar: InsuredCar(currentPrice: price, towing == true) from m.insuredCar
+        prices: CoefficientsAndPrices( towPrice: towPrice )
+    then
+        insuredCar.setPrice(currentPrice + days * towPrice);
+
+
+end
+
+rule "Alternative transport"
+
+    when
+            m: RulesModel ( insuredCar != null, days: days)
+            insuredCar: InsuredCar(currentPrice: price, alternativeRide == true) from m.insuredCar
+            prices: CoefficientsAndPrices( altTransportPrice: alternativePrice )
+        then
+            insuredCar.setPrice(currentPrice + days * altTransportPrice);
+
+
+end
+
+rule "Car repair"
+
+    when
+            m: RulesModel ( insuredCar != null, days: days)
+            insuredCar: InsuredCar(currentPrice: price, repairment == true) from m.insuredCar
+            prices: CoefficientsAndPrices( repairPrice: repairPrice )
+        then
+            insuredCar.setPrice(currentPrice + days * repairPrice);
+
+
+end
+
+rule "Accomodation"
+
+   when
+           m: RulesModel ( insuredCar != null, days: days)
+           insuredCar: InsuredCar(currentPrice: price, hotel == true) from m.insuredCar
+           prices: CoefficientsAndPrices( accomodationPrice: hotelPrice )
+       then
+           insuredCar.setPrice(currentPrice + days * accomodationPrice);
+
+
+end
+
+
 /*
 TODO: discount ako uzme za auto ili stan
-TODO: pravila auto i stan
 TODO: PDV
 */
 

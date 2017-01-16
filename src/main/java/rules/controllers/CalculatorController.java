@@ -62,6 +62,7 @@ public class CalculatorController {
         RulesModel model = new RulesModel();
 
         model.setDays(daysDiff);
+        model.setSport(data.getSport());
 
         for (int i = 0; i < data.getAgeNumberYoung(); i++){
             model.addPerson(new InsuredPerson(0));
@@ -85,17 +86,17 @@ public class CalculatorController {
                 cp.setTowPrice(tow.getCena_CK_Rizik());
             }
 
-            if(data.getTowing()) {
+            if(data.getRepair()) {
                 CK_Rizik repair = rr.findByRizik(data.getSelectedReparationPrice());
                 cp.setRepairPrice(repair.getCena_CK_Rizik());
             }
 
-            if(data.getTowing()) {
+            if(data.getHotel()) {
                 CK_Rizik hotel = rr.findByRizik(data.getSelectedHotelDays());
                 cp.setHotelPrice(hotel.getCena_CK_Rizik());
             }
 
-            if(data.getTowing()) {
+            if(data.getAlternateTransport()) {
                 CK_Rizik alternative = rr.findByRizik(data.getSelectedAlternateTransportationDistance());
                 cp.setAlternativePrice(alternative.getCena_CK_Rizik());
             }
