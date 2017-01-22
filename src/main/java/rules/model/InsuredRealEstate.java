@@ -13,6 +13,9 @@ public class InsuredRealEstate {
     private boolean burglary;
     private double price;
 
+    private int selectedRealEstateAge;
+    private int selectedRealEstateValue;
+
     public InsuredRealEstate() {
         price = 0;
     }
@@ -79,5 +82,21 @@ public class InsuredRealEstate {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getSelectedRealEstateAge() {
+        return selectedRealEstateAge;
+    }
+
+    public void setSelectedRealEstateAge(int selectedRealEstateAge) {
+        this.selectedRealEstateAge = selectedRealEstateAge;
+    }
+
+    public int getSelectedRealEstateValue() {
+        return selectedRealEstateValue;
+    }
+
+    public void setSelectedRealEstateValue(int selectedRealEstateValue) {
+        this.selectedRealEstateValue = selectedRealEstateValue;
     }
 }

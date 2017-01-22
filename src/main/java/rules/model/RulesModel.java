@@ -1,6 +1,7 @@
 package rules.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Vuletic on 13.1.2017.
@@ -14,8 +15,18 @@ public class RulesModel {
     private double groupDiscount;
     private double packageDiscount;
     private double totalPrice;
-    private boolean sport;
-    /* TODO: pdv */
+    private Boolean sport;
+    private double VAT;
+
+    private int selectedLocation;
+    private int selectedSport;
+    private int selectedInsuranceAmount;
+
+    private Date dateFrom;
+    private Date dateTo;
+
+    private Boolean realEstateInsured;
+    private Boolean carInsured;
 
     public RulesModel() {
         totalPrice = 0;
@@ -95,11 +106,69 @@ public class RulesModel {
         return packageDiscount + groupDiscount;
     }
 
-    public boolean isSport() {
+    public boolean getSport() {
         return sport;
     }
 
     public void setSport(boolean sport) {
         this.sport = sport;
     }
+
+    public boolean getCarInsured() {
+        return carInsured;
+    }
+
+    public void setCarInsured(boolean carInsured) {
+        this.carInsured = carInsured;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public boolean getRealEstateInsured() {
+        return realEstateInsured;
+    }
+
+    public void setRealEstateInsured(boolean realEstateInsured) {
+        this.realEstateInsured = realEstateInsured;
+    }
+
+    public int getSelectedInsuranceAmount() {
+        return selectedInsuranceAmount;
+    }
+
+    public void setSelectedInsuranceAmount(int selectedInsuranceAmount) {
+        this.selectedInsuranceAmount = selectedInsuranceAmount;
+    }
+
+    public int getSelectedSport() {
+        return selectedSport;
+    }
+
+    public void setSelectedSport(int selectedSport) {
+        this.selectedSport = selectedSport;
+    }
+
+    public int getSelectedLocation() {
+        return selectedLocation;
+    }
+
+    public void setSelectedLocation(int selectedLocation) {
+        this.selectedLocation = selectedLocation;
+    }
+
+
 }

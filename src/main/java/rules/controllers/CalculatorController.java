@@ -30,7 +30,6 @@ public class CalculatorController {
 
         KieSession kSession = kContainer.newKieSession("ksession-rules");
 
-
         CK_Rizik amount = rr.findByRizik(data.getSelectedInsuranceAmount());
         CK_Rizik location = rr.findByRizik(data.getSelectedLocation());
         CK_Rizik dayPrice = rr.findByRizik(11);

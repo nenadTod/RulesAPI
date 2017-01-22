@@ -5,29 +5,35 @@ package rules.model;
  */
 public class InsuredPerson {
 
-    private String name;
+    private int id;
     private int ageGroup;
     private double basePrice;
     private double price;
 
     public InsuredPerson() {
+        basePrice = 0;
+        price = 0;
     }
 
     public InsuredPerson(int ageGroup) {
         this.ageGroup = ageGroup;
+        basePrice = 0;
+        price = 0;
     }
 
-    public InsuredPerson(String name, int ageGroup) {
-        this.name = name;
+    public InsuredPerson(int id, int ageGroup) {
+        this.id = id;
         this.ageGroup = ageGroup;
+        basePrice = 0;
+        price = 0;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAgeGroup() {

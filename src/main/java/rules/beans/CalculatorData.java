@@ -10,8 +10,8 @@ public class CalculatorData {
 
     private Integer selectedLocation;
     private Date dateFrom;
-    private Integer selectedInsuranceAmount;
     private Date dateTo;
+    private Integer selectedInsuranceAmount;
     private Integer ageNumberYoung;
     private Integer ageNumberAdult;
     private Integer ageNumberOld;

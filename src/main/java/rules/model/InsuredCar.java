@@ -13,6 +13,11 @@ public class InsuredCar {
     private boolean alternativeRide;
     private double price;
 
+    private int selectedAlternateTransportationDistance;
+    private int selectedHotelDays;
+    private int selectedTowingDistance;
+    private int selectedReparationPrice;
+
     public InsuredCar() {
         price = 0;
     }
@@ -71,5 +76,37 @@ public class InsuredCar {
 
     public void setAlternativeRide(boolean alternativeRide) {
         this.alternativeRide = alternativeRide;
+    }
+
+    public int getSelectedAlternateTransportationDistance() {
+        return selectedAlternateTransportationDistance;
+    }
+
+    public void setSelectedAlternateTransportationDistance(int selectedAlternateTransportationDistance) {
+        this.selectedAlternateTransportationDistance = selectedAlternateTransportationDistance;
+    }
+
+    public int getSelectedHotelDays() {
+        return selectedHotelDays;
+    }
+
+    public void setSelectedHotelDays(int selectedHotelDays) {
+        this.selectedHotelDays = selectedHotelDays;
+    }
+
+    public int getSelectedTowingDistance() {
+        return selectedTowingDistance;
+    }
+
+    public void setSelectedTowingDistance(int selectedTowingDistance) {
+        this.selectedTowingDistance = selectedTowingDistance;
+    }
+
+    public int getSelectedReparationPrice() {
+        return selectedReparationPrice;
+    }
+
+    public void setSelectedReparationPrice(int selectedReparationPrice) {
+        this.selectedReparationPrice = selectedReparationPrice;
     }
 }
