@@ -191,10 +191,16 @@ rule "Accomodation"
 
 end
 
+rule "Package discount"
 
-/*
-TODO: discount ako uzme za auto ili stan
-TODO: PDV
-*/
+    when
+        m: RulesModel (carInsured == true, realEstateInsured == true, totalPrice: totalPrice)
+
+    then
+        m.setPackageDiscount(totalPrice * 0.1);
+        update(m);
+
+end
+
 
 

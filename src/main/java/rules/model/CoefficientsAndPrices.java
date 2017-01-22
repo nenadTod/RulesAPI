@@ -24,6 +24,8 @@ public class CoefficientsAndPrices {
     private double hotelPrice;
     private double alternativePrice;
 
+    private double VATRate;
+
 
     public CoefficientsAndPrices() {
 
@@ -166,5 +168,13 @@ public class CoefficientsAndPrices {
 
     public void setAlternativePrice(double alternativePrice) {
         this.alternativePrice = alternativePrice;
+    }
+
+    public double getVATRate() {
+        return VATRate;
+    }
+
+    public void setVATRate(double VATRate) {
+        this.VATRate = VATRate;
     }
 }

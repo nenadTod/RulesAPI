@@ -1,15 +1,19 @@
 package rules.controllers;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rules.beans.CK_Rizik;
-import rules.beans.CalculatorData;
+import rules.beans.Stopa_PDV;
 import rules.model.*;
 import rules.repositories.CK_Rizik_Repository;
+import rules.repositories.Stopa_PDV_Repository;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,9 +24,12 @@ public class PolicyController {
     @Autowired
     CK_Rizik_Repository rr;
 
+    @Autowired
+    Stopa_PDV_Repository sr;
+
     @CrossOrigin
     @RequestMapping(value = "/policy", method = RequestMethod.POST)
-    public RulesModel rules(@RequestBody RulesModel data) {
+    public String rules(@RequestBody RulesModel data) throws IOException {
 
         KieServices ks = KieServices.Factory.get();
 
@@ -43,6 +50,8 @@ public class PolicyController {
         CK_Rizik floodPrice = rr.findByRizik(33);
         CK_Rizik burglaryPrice = rr.findByRizik(34);
 
+        Stopa_PDV pdv = sr.findByPDV(1);
+
         long diff = data.getDateTo().getTime() - data.getDateFrom().getTime();
         int daysDiff = (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
@@ -57,6 +66,9 @@ public class PolicyController {
         cp.setFirePricePerDay(firePrice.getCena_CK_Rizik());
         cp.setFloodPricePerDay(floodPrice.getCena_CK_Rizik());
         cp.setBurglaryPricePerDay(burglaryPrice.getCena_CK_Rizik());
+
+        cp.setVATRate(pdv.getStopa_PDV());
+        data.setVATRate(pdv.getStopa_PDV());
 
         data.setDays(daysDiff);
 
@@ -102,7 +114,10 @@ public class PolicyController {
         kSession.insert(cp);
         kSession.fireAllRules();
 
-        return data;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+        return objectMapper.writeValueAsString(data);
     }
 
 }

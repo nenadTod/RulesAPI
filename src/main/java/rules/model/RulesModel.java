@@ -17,6 +17,7 @@ public class RulesModel {
     private double totalPrice;
     private Boolean sport;
     private double VAT;
+    private double VATRate;
 
     private int selectedLocation;
     private int selectedSport;
@@ -170,5 +171,19 @@ public class RulesModel {
         this.selectedLocation = selectedLocation;
     }
 
+    public double getVAT() {
+        return VAT;
+    }
 
+    public void setVAT(double VAT) {
+        this.VAT = VAT;
+    }
+
+    public double getVATRate() {
+        return VATRate;
+    }
+
+    public void setVATRate(double VATRate) {
+        this.VATRate = VATRate;
+    }
 }
