@@ -64,13 +64,13 @@ public class CalculatorController {
         model.setSport(data.getSport());
 
         for (int i = 0; i < data.getAgeNumberYoung(); i++){
-            model.addPerson(new InsuredPerson(0));
+            model.addPerson(new InsuredPerson(4));
         }
         for (int i = 0; i < data.getAgeNumberAdult(); i++){
-            model.addPerson(new InsuredPerson(1));
+            model.addPerson(new InsuredPerson(5));
         }
         for (int i = 0; i < data.getAgeNumberOld(); i++){
-            model.addPerson(new InsuredPerson(2));
+            model.addPerson(new InsuredPerson(6));
         }
 
         if(data.getSport()){

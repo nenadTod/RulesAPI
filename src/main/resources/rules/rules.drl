@@ -63,7 +63,7 @@ rule "Elderly risk"
 
     when
         m: RulesModel()
-        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 2) from m.insuredPeople
+        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 6) from m.insuredPeople
         prices: CoefficientsAndPrices ( elderlyCoefficient: oldsCoefficient)
     then
         person.setPrice(elderlyCoefficient * basePrice + (price-basePrice));
@@ -76,7 +76,7 @@ rule "Young discount"
 
     when
         m: RulesModel()
-        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 0) from m.insuredPeople
+        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 4) from m.insuredPeople
         prices: CoefficientsAndPrices ( youngsCoefficient: youngsCoefficient)
     then
        person.setPrice(youngsCoefficient * basePrice + (price-basePrice));
@@ -89,7 +89,7 @@ rule "Adults price"
 
     when
         m: RulesModel()
-        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 1) from m.insuredPeople
+        person: InsuredPerson ( basePrice: basePrice, price: price, ageGroup: ageGroup == 5) from m.insuredPeople
         prices: CoefficientsAndPrices ( adultsCoefficient: adultsCoefficient)
     then
        person.setPrice(adultsCoefficient * basePrice + (price-basePrice));
