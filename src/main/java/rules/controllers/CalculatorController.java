@@ -62,6 +62,8 @@ public class CalculatorController {
 
         model.setDays(daysDiff);
         model.setSport(data.getSport());
+        model.setRealEstateInsured(data.getRealEstateInsured());
+        model.setCarInsured(data.getCarInsured());
 
         for (int i = 0; i < data.getAgeNumberYoung(); i++){
             model.addPerson(new InsuredPerson(4));
