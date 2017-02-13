@@ -27,7 +27,7 @@ public class PolicyController {
     @Autowired
     Stopa_PDV_Repository sr;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "https://seposiguranje.azurewebsites.net")
     @RequestMapping(value = "/policy", method = RequestMethod.POST)
     public String rules(@RequestBody RulesModel data) throws IOException {
 

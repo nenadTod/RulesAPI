@@ -18,7 +18,7 @@ public class CalculatorController {
     @Autowired
     CK_Rizik_Repository rr;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "https://seposiguranje.azurewebsites.net")
     @RequestMapping(value = "/calculator", method = RequestMethod.POST)
     public Double rules(@RequestBody CalculatorData data) {
 
